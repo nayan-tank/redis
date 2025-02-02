@@ -1,0 +1,126 @@
+-------------------------------------------
+		Redis
+-------------------------------------------
+
+1. Redis (NoSQL DB) 
+- Frequently access data
+- store data in file not in RAM
+
+Type of DB
+-------------
+RDB - Take a snap  
+AOF(Append Only File) - 
+
+-------------------
+
+CONNECT IP
+AUTH <token>
+
+INFO 
+
+KEYS <name>
+KEYS * (all)
+
+SET key value
+SET key value nx (SET if key doesn't exists)
+SET key value EXPIRE 10 (expire in 10 sec)
+SETEX key value 10 (expire in 10 sec)
+TTL key (get time to live)(-2: key doesn't exists) (-1: never expire)
+
+GET key
+MSET key1 value1 key2 value2 
+MGET key1 key2 
+
+
+SET count 0
+INCR count (count - 1)
+
+INCRBY count 10 (count 11)
+
+------
+ List
+------
+LPUSH listname key
+RPUSH listname key
+
+LPOP listname 
+RPOP listname
+
+BLPOP listname 10 - pop in blocking mode, wait for 10 sec to get ele if not exists
+
+LLNEN listname - length
+LMOVE - move element from one list to another 
+LTRIM
+
+LRANGE listname 0 -1 (get all element)
+
+DEL listname 
+KEYS users* - get all key startwith users
+
+
+-----
+ SET 
+-----
+
+- Duplicate is not allowed 
+- access by index 
+- return 0 if not exists else 1
+
+SADD SETname value
+SREM SETname value
+SISMEMBER SETname value 
+SINTER SET1 SET2 
+
+
+-------
+ Hases 
+-------
+
+HSET name value1 key2 value2
+HGET name key
+HMGET name
+HINCRBY name key value
+
+
+------------
+ Sorted SET
+------------
+      name rank value	
+ZADD hackers 2 "Alan Kay"
+ZADD hackers 1 "Nayan Tank"
+
+ZRANGE hackers 0 -1
+ZREVRANGE hackers 0 -1
+ZREVRANGEBYSCORE hackers 1940 1960
+
+ZRANK hackers "Nayan Tank" => 1
+
+
+
+---------
+ Streams 
+---------
+
+XADD key * <list of values>	
+XREAD
+XRANGE
+XLEN
+
+
+
+
+In case of master-server architecture:
+- Clone master data to slave 
+	- Add below line in redis config
+		- slaveof [ip] [port]
+
+
+
+Sentinel 
+--------
+Job of sentinel is to send signal to slave node for act as a master when your master node goes down
+
+
+
+
+
